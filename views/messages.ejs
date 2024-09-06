@@ -1,0 +1,11 @@
+<ul class="message">
+    <% messages.forEach(message => { %>
+      <li>
+        <a ">
+          <span><%= message.email %></span>
+          <span class="message__date"><%= message.createdAt.toDateString() %></span>
+          <p><%= message.message %></p>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
