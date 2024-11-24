@@ -30,9 +30,14 @@ router.get('/admin', async (req, res) => {
 router.post('/admin', async (req, res) => {
   try {
     const { username, password } = req.body;
-        const user = await User.findOne({ username });
+    console.log('username',username)
+    console.log('password',password)
+
+      const user = await User.findOne({ username });
+
+      console.log('user',user)
+
     if (!user && !( await bcrypt.compare(password, user.password))) {
-      console.log('something')
       throw new Unauthorized('Invalid credentials');
     }
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
@@ -43,7 +48,6 @@ router.post('/admin', async (req, res) => {
     throw error;
   }
 });
-
 
 
 router.get('/dashboard', authMiddleware, async (req, res) => {
